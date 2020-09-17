@@ -1,0 +1,17 @@
+{
+  "name": "horizon",
+  "version": "1.0.0",
+  "description": "Horizon is the Crawler Service of Commute.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Phat Tran",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "kafkajs": "^1.13.0",
+    "puppeteer": "^5.3.0",
+    "puppeteer-core": "^5.3.0",
+    "puppeteer-go": "^1.0.3"
+  }
+}
