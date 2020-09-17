@@ -1,0 +1,107 @@
+version: '3'
+
+networks:
+  laravel:
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - db
+    networks:
+      - laravel
+
+  db:
+    image: postgres:10.1
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - ./docker/pgsql/database.env
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "9000:9000"
+    networks:
+      - laravel
+
+  composer:
+    image: composer:latest
+    container_name: composer
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - php
+    networks:
+      - laravel
+
+  npm:
+    image: node:13.7
+    container_name: npm
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm']
+
+  artisan:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: artisan
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    working_dir: /var/www/html
+    entrypoint: ['php', '/var/www/html/artisan']
+    networks:
+      - laravel
+
+  phpunit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: phpunit
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    working_dir: /var/www/html
+    entrypoint: ["./vendor/bin/phpunit"]
+    networks:
+      - laravel
+
+  ciphpunit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: phpunit
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    working_dir: /var/www/html
+    entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
+    networks:
+      - laravel
+
+volumes:
+  database-data:
