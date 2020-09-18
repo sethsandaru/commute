@@ -14,3 +14,8 @@ cd "$nowWorkingDir/kafka";
 docker-compose up -d
 echo "[Kafka-Service] Started\n"
 
+# Start Mach
+echo "[Mach-Service] Starting up...\n"
+cd "$nowWorkingDir/mach";
+docker-compose up -d
+echo "[Mach-Service] Started\n"
