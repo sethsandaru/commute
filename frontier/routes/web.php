@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+
+Route::middleware('auth')->group(function() {
+    Route::get('/dashboard', 'HomeController@index')->name('dashboard.page');
+
+    // Crawler-Profiles
+    Route::prefix('crawler-profiles')->group(function() {
+        Route::get('/', 'HomeController@index')->name('profile.page');
+    });
+
+    // Crawler-Results
+    Route::prefix('crawler-results')->group(function() {
+        Route::get('/', 'HomeController@index')->name('result.page');
+    });
+});
