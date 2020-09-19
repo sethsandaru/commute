@@ -32,7 +32,9 @@ crawlerRules =
 				//(type 2)
 				//	- 1: by selector
 				//  - 2: by xPath
-			customData: "abc xyz" // custom data for the type-of-rule
+
+			extractionRules: {}, // for entity
+			containerSelector: ".", // for bulk-extraction (container > children)
 		},
 	]
 }
