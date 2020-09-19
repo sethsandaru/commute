@@ -16,6 +16,11 @@ Crawler.make = async function (
     url,
     rules
 ) {
+    const resultBucket = {
+        status: true,
+        // data will stay below here
+    }
+
     try {
         const [page, browser] = puppeteerCall(url)
 
@@ -33,8 +38,14 @@ Crawler.make = async function (
         }
 
 
+        // when everything is done, close the browser and result the result
+        browser.close()
+        return resultBucket
     } catch (e) {
-        return false
+        // TODO: A logger should be added here
+        resultBucket.status = false
+        resultBucket.errorMessage = e.message
+        return resultBucket
     }
 
 }
