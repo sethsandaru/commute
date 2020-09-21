@@ -89,11 +89,11 @@ services:
     networks:
       - laravel
 
-  ciphpunit:
+  travisphpunit:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: phpunit
+    container_name: travisphpunit
     volumes:
       - ./:/var/www/html
     depends_on:

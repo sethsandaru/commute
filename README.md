@@ -8,7 +8,9 @@ A crawler-tool. Basically, create your crawler-action using a set of rules. Then
 
 ## Services & Stack
 - Laravel (PHP) as Presentation-Service (Frontend)
+    - Visit [Frontier](./frontier)
 - NodeJS as Crawler-Service
+    - Visit [Horizon](./horizon)
 - Go as Crawler-Rule-Service
 - Docker
 - Kafka as Message Queue
