@@ -1,0 +1,21 @@
+version: '3'
+
+networks:
+  mach:
+
+services:
+
+  db:
+    image: postgres:10.1
+    restart: always
+    ports:
+      - 5050:5432
+    env_file:
+      - ./docker/pgsql/database.env
+    volumes:
+      - mach-db:/var/lib/postgresql/data/
+    networks:
+      - mach
+
+volumes:
+  mach-db:

@@ -14,6 +14,7 @@ A crawler-tool. Basically, create your crawler-action using a set of rules. Then
 - Go as Crawler-Rule-Service
 - Docker
 - Kafka as Message Queue
+- Database all services: PostgreSQL (post-gres-ql)
 
 ## Start the game
 Coming soon...
