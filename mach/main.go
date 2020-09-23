@@ -5,13 +5,14 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"mach/routes"
+	model "mach/app/models"
 	"os"
 )
 
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file. Application can't be started")
+		log.Fatal("Error loading .env file. Application can't be started. Consider using the .env.example to create your own env file.")
 		os.Exit(1)
 	}
 
@@ -24,6 +25,9 @@ func main() {
 
 	// Registering the routes
 	routes.InitializeRoutes(router)
+
+	// Initialize ORM
+	model.ORMInit()
 
 	// start serving the application
 	router.Run(":" + os.Getenv("APPLICATION_PORT"))
