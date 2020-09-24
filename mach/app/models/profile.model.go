@@ -23,3 +23,15 @@ func getProfileById(id int) *Profile {
 
 	return profile
 }
+
+func createProfile(profile *Profile) {
+
+}
+
+func updateProfile(profile *Profile) {
+
+}
+
+func deleteProfile(id int) bool {
+	return true
+}
