@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-var db *pg.DB
+var DB *pg.DB
 
 func ORMInit() {
 	opt, err := pg.ParseURL(os.Getenv("DB_CONNECTION_STRING"))
@@ -13,5 +13,5 @@ func ORMInit() {
 		panic(err)
 	}
 
-	db = pg.Connect(opt)
+	DB = pg.Connect(opt)
 }

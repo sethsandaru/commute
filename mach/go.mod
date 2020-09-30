@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/gin-gonic/gin v1.6.3
-	github.com/go-pg/pg/v10 v10.1.1 // indirect
+	github.com/go-pg/pg/v10 v10.1.1
 	github.com/go-playground/validator/v10 v10.3.0 // indirect
 	github.com/golang-migrate/migrate/v4 v4.12.2
 	github.com/joho/godotenv v1.3.0

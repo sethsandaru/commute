@@ -14,4 +14,11 @@ func InitializeRoutes(router *gin.Engine) {
 
 	// Index Route
 	machRouter.GET("/", controllers.ShowIndexPage)
+
+	// Profile Routes
+	machRouter.GET("/profile", controllers.GetProfileList)
+	machRouter.GET("/profile/:id", controllers.GetSingleProfile)
+	machRouter.POST("/profile", controllers.InsertProfile)
+	machRouter.PUT("/profile/:id", controllers.UpdateProfile)
+	machRouter.DELETE("/profile/:id", controllers.DeleteProfile)
 }
