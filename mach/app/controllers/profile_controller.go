@@ -22,12 +22,48 @@ func GetProfileList(c *gin.Context) {
 	}, "")
 }
 
-func GetSingleProfile(c *gin.Context) {
+func GetSingleProfile(c *gin.Context)  {
+	idParam := c.Param("id")
+	id, parseErr := strconv.Atoi(idParam)
 
+	if (parseErr != nil) {
+		renderError(c, parseErr)
+		return
+	}
+
+	profileInfo := profile.GetProfileById(id)
+	render(c, gin.H{
+		"payload": profileInfo,
+	}, "")
 }
 
 func InsertProfile(c *gin.Context) {
+	// pick data
+	name, _ := c.GetPostForm("name")
+	userId, _ := c.GetPostForm("user_id")
+	userIdInt, _ := strconv.Atoi(userId)
 
+	// prepare statement
+	sProfile := new(profile.Profile)
+	sProfile.Name = name
+	sProfile.UserId = userIdInt
+
+	// save
+	status, err := profile.CreateProfile(sProfile)
+	if err != nil || !status {
+		render(c, gin.H{
+			"payload": gin.H{
+				"success": false,
+				"error": "Error while adding new Profile",
+			},
+		}, "")
+	}
+
+	render(c, gin.H{
+		"payload": gin.H{
+			"success": true,
+		},
+	}, "")
 }
 
 func UpdateProfile(c *gin.Context) {

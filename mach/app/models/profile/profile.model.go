@@ -53,14 +53,14 @@ func GetProfileById(id int) *Profile {
 	return profile
 }
 
-func CreateProfile(profile *Profile) bool {
+func CreateProfile(profile *Profile) (bool, error) {
 	result, err := models.DB.Model(profile).Insert()
 
 	if err != nil {
-		panic(err)
+		return false, err
 	}
 
-	return result.RowsAffected() > 0
+	return result.RowsAffected() > 0, nil
 }
 
 func UpdateProfile(profile *Profile) bool {
